@@ -200,7 +200,7 @@ const LoginContextProvider = ({children}) => {
    *    roles 세팅
    */
   const loginSetting = (userData, accessToken) => {
-    const {id, username, role, name} = userData;
+    const {id, username, role, name, dept, position} = userData;
     const headers = {
       'Authorization': `Bearer ${accessToken}`
     };
@@ -227,7 +227,7 @@ const LoginContextProvider = ({children}) => {
     setIsLogin(true);
 
     // 유저 정보 세팅
-    const updatedUserInfo = {id, username, role, name}
+    const updatedUserInfo = {id, username, role, name, dept, position}
     setUserInfo(updatedUserInfo);
 
     // 권한정보 세팅

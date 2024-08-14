@@ -70,7 +70,6 @@ const Chat = () => {
                             }
                             </AccordionDetails>
                         </Accordion>
-                        <div>파일</div>
 
                     </div>
                 </div>

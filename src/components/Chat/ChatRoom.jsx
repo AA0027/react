@@ -1,4 +1,4 @@
-import { Button, TextareaAutosize } from '@mui/material';
+import {TextareaAutosize } from '@mui/material';
 import './Chat.css';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import ChatBox from './ChatBox';
@@ -8,8 +8,7 @@ const ChatRoom = (prop) => {
     const {userInfo, stompClient} = useContext(LoginContext);
     const [message, setMessage] = useState("");
     const scrollRef = useRef();
-    const [file, setFile] = useState(null);
-    const fileInput = useRef(null);
+    
 
     useEffect(()=>{
         if(scrollRef){
@@ -17,42 +16,6 @@ const ChatRoom = (prop) => {
             console.log("===========" + scrollRef.current.scrollTop);
         }
     },[messages]);
-
-
-    // 파일 업로드 버튼 클릭 시 파일 입력 요소 클릭 이벤트 발생
-    const handleButtonClick = (e) => {
-    fileInput.current.click();
-    };
-
-    // 파일 입력 요소의 값이 변경되면 호출되는 함수
-    const handleChange = (e) => {
-    // 선택한 파일 정보를 콘솔에 출력
-        console.log(e.target.files);
-        setFile(e.target.files[0]);
-    };
-
-    const handleFileUpload = () => {
-        if (!file) {
-          alert('파일을 선택하세요.');
-          return;
-        }
-    
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64File = reader.result.split(',')[1]; // Base64 데이터만 추출
-          const payload = {
-            fileName: file.name,
-            fileType: file.type,
-            data: base64File,
-          };
-    
-         stompClient.current.send(`/pub/${code}`,{}, JSON.stringify(payload));
-    
-          alert('파일이 전송되었습니다.');
-        };
-    
-        reader.readAsDataURL(file);
-      };
 
     const keyDownEvent = (e) => {
         if(e.nativeEvent.isComposing){
@@ -102,13 +65,6 @@ const ChatRoom = (prop) => {
             <ChatBox messages={messages} setMessages={setMessages} code={code} scrollRef={scrollRef}/>
             <div className='input-box'>
                 <TextareaAutosize  onKeyDown={keyDownEvent}  className="input"  placeholder="write message..." onChange={change} style={{height: "24px"}}/>
-                <Button variant="contained" size='small' onClick={handleButtonClick}>
-                    파일선택
-                </Button>
-                <Button variant="contained" size='small' onClick={handleFileUpload}>
-                    파일전송
-                </Button>
-                <input type='file' ref={fileInput} onChange={handleChange} style={{display: "none"}}/>
             </div>
         </div>
     );

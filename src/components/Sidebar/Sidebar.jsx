@@ -1,11 +1,10 @@
 import { Avatar, Badge, Box, Button, Modal, TextField, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
-import MailIcon from '@mui/icons-material/Mail';
 import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import * as data from '../../apis/data';
-
+import * as convert from './Convert';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -53,7 +52,8 @@ const Sidebar = () => {
                 sx={{width: "100px", height: "100px", margin: "20px"}}/>
 
             <div className='user-info merriweather-regular'> 
-                조창성(사장)
+                {userInfo.name}({convert.getDept(userInfo.dept)})<br></br>
+                {convert.getPos(userInfo.position) }
             </div>
 
             <Button variant="contained" size="small" onClick={logout}>

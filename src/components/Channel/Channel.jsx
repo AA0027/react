@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import * as data from '../../apis/data'
 const Channel = (prop) => {
-    const { name, code, channelList } = prop;
+    const { name, code, channelList, setChannelList } = prop;
     const {stompClient, userInfo} = useContext(LoginContext);
     const navigate = useNavigate();
     return (
@@ -20,19 +20,11 @@ const Channel = (prop) => {
                                 code: "",
                                 subId: ""
                             }
-                            const codeList = channelList.map((a) => (a.code));
-                            if(!codeList.includes(code)){
+                            
+                            if(!channelList.includes(code)){
                                 const {id} = stompClient.current.subscribe(`/sub/${code}`);
-                                const d = {
-                                    username: userInfo.username,
-                                    code: code,
-                                    subId: id,
-                                };
-    
-                                // 구독 목록에 등록하기
-                                data.sub(d);
-                                
                                 console.log("구독 결과 : " + id);
+                                setChannelList(...channelList, code);
                             }
                             navigate("/chat", {state: {name: name, code: code}});
                         }}>

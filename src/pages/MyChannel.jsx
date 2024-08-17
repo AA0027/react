@@ -4,7 +4,6 @@ import Channel from '../components/Channel/Channel';
 import '../components/Channel/Channel.css';
 import * as data from '../apis/data';
 import { LoginContext } from '../contexts/LoginContextProvider';
-import { useLocation } from 'react-router-dom';
 const MyChannel = () => {
     const [ channelList, setChannelList ] = useState([]);
     const { userInfo, isLogin } = useContext(LoginContext);
@@ -26,7 +25,7 @@ const MyChannel = () => {
                     <div className=' content jua-regular'>
                         <div className='head'>My Channel</div>
                         <div className='channel-list'>
-                            { channelList.map(e => (<Channel key={e.id} name={e.name} code={e.code} channelList={channelList}/>)) }
+                            { channelList.map(e => (<Channel key={e.id} name={e.name} code={e.code} channelList={channelList} setChannelList={setChannelList}/>)) }
                         </div>
                     </div>
                 

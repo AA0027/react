@@ -3,36 +3,48 @@ import { deepPurple } from '@mui/material/colors';
 import React, { useEffect, useRef } from 'react';
 import './Message.css';
 const Message = (prop) => {
-    const { m_name, my_name, content, regdate } = prop;
+    const { m, my_name} = prop;
 
-    if(m_name === my_name){
+    if(m.sender.name === my_name){
         return (
-            <div className='message my' >
-                <div className='date'>{(regdate.split(" "))[1]}</div>
-                <div className='msg-bowl'>{content}</div> 
-                <Avatar sx={{ bgcolor: deepPurple[500], width: "40px"
-                    , height: "40px", }}>
-                        <div className='name'>{m_name}</div>
-                </Avatar>
-           
+            <div className='message my'>
+                <div className='message-info'>
+                    <div className='date'>{(m.regdate.split(" "))[1]}</div>
+                    <div className='msg-bowl'>
+                        {m.content && <div className='msg'>{m.content}</div>}
+                        {m.files && m.files.map((f) => <div className='file-msg'>{f.sourcename}</div>)}
+                    </div> 
+                    <Avatar sx={{ bgcolor: deepPurple[500], width: "40px"
+                        , height: "40px", }}>
+                            <div className='name'>{m.sender.name}</div>
+                    </Avatar>
+                    
+                </div>
+                
             </div>
          );  
     }
     else {
         return (
             <div className='message you' >
-                <div className='avartar'>
-                    <Avatar sx={{ bgcolor: deepPurple[500], width: "40px"
-                        , height: "40px"}} >
-                            <div className='name'>{m_name}</div>
-                    </Avatar>
+                <div>
+                    <div className='avartar'>
+                        <Avatar sx={{ bgcolor: deepPurple[500], width: "40px"
+                            , height: "40px"}} >
+                                <div className='name'>{m.sender.name}</div>
+                        </Avatar>
+                    </div>
+                    <div className='msg-bowl'>
+                        {m.content !== "" && <div>{m.content}</div>}
+                        {m.files && m.files.map((f) => <div className='file-msg'>{f.sourcename}</div>)}
+                    </div> 
+                    <div className='date'>
+                        {
+                            (m.regdate.split(" "))[1]
+                        }
+                    </div>
                 </div>
-                <div className='msg-bowl'>{content}</div> 
-                <div className='date'>
-                    {
-                        (regdate.split(" "))[1]
-                    }
-                </div>
+                
             </div>
          );
     }

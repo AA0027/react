@@ -2,7 +2,7 @@ import { Box, Button, Checkbox, FormControl, InputLabel, List, ListItem, ListIte
 import React, { useEffect, useRef, useState } from 'react';
 import * as data from '../../apis/data'
 const Emp = (prop) => {
-    const {code, list, setList, setOpen, attendee, addEmp, setAddEmp} = prop;
+    const {code, list, setList, setOpen, attendee, addData, setAddData} = prop;
     const [empList, setEmpList] = useState([0]); 
     const origin = useRef([0]);
     const [dept, setDept] = useState("");
@@ -61,7 +61,7 @@ const Emp = (prop) => {
             console.log("사용자 초대완료");
             setList([]);
             setOpen(false);
-            setAddEmp(!addEmp);
+            setAddData(!addData);
         }
       }
 

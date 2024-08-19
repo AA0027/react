@@ -5,6 +5,10 @@
     gap: 3px;
     margin: 8px;
 }
+
+.message-info{
+    display: flex;
+}
 .my {
     margin-left: auto;
 
@@ -15,13 +19,27 @@
 }
 
 .msg-bowl {
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+.msg {
     background-color: bisque;
     border-radius: 3px;
     padding: 5px;
-    max-width: 200px;
-    display: flex;
-    align-items: center;
 }
+
+.file-msg {
+    background-color: white;
+    white-space: nowrap;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 0.6rem;
+}
+
+
 
 .name {
     display: flex;

@@ -65,7 +65,7 @@ const ChatBox = (prop) => {
                             {date}
                         </div>
                         {groupedMessages[date].map((m) => (
-                           m.sender && <Message m_name={m.sender.name} my_name={userInfo.name} content={m.content} regdate={m.regdate} />
+                           m.sender && <Message m={m} my_name={userInfo.name} />
                         ))}
                     </div>
                 ))}

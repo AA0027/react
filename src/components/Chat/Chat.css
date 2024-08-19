@@ -54,6 +54,17 @@
     margin: 0;
 }
 
+.file-btn {
+    white-space: nowrap;
+    font-size: 2px;
+}
+
+.selected-file {
+    display: flex;
+    gap: 5px;
+    font-size: 1rem;
+}
+
 .chat-data {
     display: flex;
     flex-direction: column;

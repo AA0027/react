@@ -42,4 +42,7 @@ import { SERVER_HOST } from './api';
     // 구독 해제하기
     export const unSub = async (subId) => api.get(`${SERVER_HOST}/channel/unsub/${subId}`);
 
-// end
+// 끝
+
+// 채팅방의 모든 파일 가져오기
+    export const getFiles = async (code) => api.get(`${SERVER_HOST}/api/file/list?code=${code}`);

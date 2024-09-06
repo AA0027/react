@@ -74,7 +74,7 @@ const Sidebar = (props) => {
     return (
         <div className='side-bar'>
             <div className='side-item user-avatar'>
-                <Avatar src="/broken-image.jpg" sx={{width: "50%", height: "50%"}}/>
+                <Avatar src="/broken-image.jpg" sx={{width: "70px", height: "70px"}}/>
             </div>   
             <Button className='side-item logout' variant="contained" size="small" onClick={logout}>
                     로그아웃

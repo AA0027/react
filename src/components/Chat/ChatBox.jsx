@@ -5,7 +5,6 @@ import { LoginContext } from '../../contexts/LoginContextProvider';
 const ChatBox = (prop) => {
     const { scrollRef, }  = prop;
     const { userInfo , messages} = useContext(LoginContext);
-    
     let groupedMessages;
    
     useEffect(()=>{

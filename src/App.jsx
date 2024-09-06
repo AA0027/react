@@ -1,9 +1,9 @@
 import './App.css';
-import './components/Body/Body.css'
+import './components/Body/Body.css';
+import './components/Channel/Channel.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Chat from './pages/Chat';
-import MyChannel from './pages/MyChannel';
 import LoginContextProvider from './contexts/LoginContextProvider'
 import LoginForm from './components/Login/LoginForm';
 

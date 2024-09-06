@@ -10,18 +10,19 @@ const Channel = (prop) => {
     const { code, name, creator, channelList, setChannelList} = prop;   
     const [attendee, setAttendee] = useState([]);
     const navigate = useNavigate();
-    const { userInfo} = useContext(LoginContext);
+    const { userInfo, getMsg, stompClient, flag, setFlag} = useContext(LoginContext);
     
     useEffect(()=>{
         getAttendees();
     }, []);
-
+    
 
    
     const getAttendees = async () => {
         const response = await data.attendeeList(code);
         setAttendee(response.data);
    }
+
 
    // 채팅방 삭제
    const deleteChatRoom = async () => {
@@ -51,6 +52,23 @@ const Channel = (prop) => {
         }else{
             window.alert("에러발생");
         }
+    }
+    // 구독하기
+    const subRoom = (x) => {
+        const {id} = stompClient.current.subscribe(`/sub/${x.code}`, (m) => {
+                const msg = JSON.parse(m.body);
+                if(msg.type === "file")
+                    setFlag(!flag);
+                getMsg(x);
+            });
+        
+        console.log(`subId : ${id}`);
+      }
+
+    const move = async () => {
+        await getMsg({ code: code, username: userInfo.username });
+        subRoom({ code: code, username: userInfo.username });
+        navigate('/chat', {state:{name: name, code: code}});
     }
     
    
@@ -86,7 +104,7 @@ const Channel = (prop) => {
 
                 <Button variant="contained" size="small" 
                      onClick={() => {
-                            navigate('/chat', {state:{name: name, code: code}});
+                            move();
                         }}>
                         입장
                 </Button>

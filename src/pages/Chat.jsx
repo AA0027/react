@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar/Sidebar';
 import ChatRoom from '../components/Chat/ChatRoom';
 import { LoginContext } from '../contexts/LoginContextProvider';
@@ -11,7 +11,7 @@ import Emp from '../components/Chat/Emp';
 
 const Chat = () => {
     
-    const { isLogin, userInfo, messages, subRoom, getMsg} = useContext(LoginContext);
+    const { isLogin, flag } = useContext(LoginContext);
     const location = useLocation();
     const { name, code } = location.state;
     const [open, setOpen] = useState(false);
@@ -23,10 +23,8 @@ const Chat = () => {
     
     useEffect(() => {
         console.log("1. Chat.jsx"); 
-        getMsg({code: code, username: userInfo.username});
-        subRoom(code, {code: code, username: userInfo.username});
         getChatDatas();        
-    }, [ fileM ]);
+    }, [ fileM , flag]);
     
     
    const getChatDatas = async () => {

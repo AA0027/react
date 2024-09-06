@@ -42,6 +42,7 @@ const LoginContextProvider = ({children}) => {
   const subList = useRef([]);
   const [inviteCard, setInviteCard] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [flag, setFlag] = useState(true);
   /**
    * 💍✅ 로그인 체크
    *
@@ -288,9 +289,9 @@ const LoginContextProvider = ({children}) => {
     }
   }
 
-  const subRoom = (code, x) => {
-    subList.current = [...(subList.current), code];
-    const {id} = stompClient.current.subscribe(`/sub/${code}`, () => {
+  const subRoom = (x) => {
+    subList.current = [...(subList.current), x.code];
+    const {id} = stompClient.current.subscribe(`/sub/${x.code}`, () => {
             getMsg(x);
         })
   }
@@ -306,7 +307,7 @@ const LoginContextProvider = ({children}) => {
   return (
     <>
     <LoginContext.Provider value={ { isLogin, userInfo, roles, stompClient, subList, loginCheck, login, logout, inviteCard
-      , getInvite, setInviteCard, messages, getMsg, subRoom}}>
+      , getInvite, setInviteCard, messages, getMsg, flag, setFlag}}>
         {children}
     </LoginContext.Provider>
     </>
